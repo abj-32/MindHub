@@ -22,6 +22,7 @@ async function handleUserSignIn(req,res) {
     return res.cookie('token',token).redirect("/")
     }
     catch(error){
+        
         return res.render("signin",{
             error:"Incorrect email or password",
         })

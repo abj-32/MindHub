@@ -52,7 +52,10 @@ UserSchema.pre("save", function (next) {
 
 UserSchema.static("matchPasswordandGenerateToken", async function (email, password) {
   const user = await this.findOne({ email }); 
-  if (!user) throw new Error("USER NOT FOUND");
+  if (!user) {
+    console.log("user not found");
+    throw new Error("USER NOT FOUND");
+  }
 
   const { salt, password: hashedPassword } = user;
 
@@ -61,6 +64,7 @@ UserSchema.static("matchPasswordandGenerateToken", async function (email, passwo
     .digest("hex");
 
   if (hashedPassword !== userProvidedHash) {
+    console.log("Incorrect password");
     throw new Error("Incorrect username or password");
   }
 
