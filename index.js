@@ -28,6 +28,9 @@ connectToMongoDB("mongodb://localhost:27017/blogify").then(() => {
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser())
 app.use(checkForAuthentication("token"))
+ //app.use(express.static('public'));
+app.use(express.static( path.resolve('./public')))
+
 
 //==========================middlewares end===============================
 
@@ -38,6 +41,7 @@ app.use(checkForAuthentication("token"))
 //======Routes==========================================
 const userRouter = require("./routes/user");
 const blogRouter = require("./routes/blog");
+
 
 //======================================================
 

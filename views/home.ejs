@@ -3,10 +3,34 @@
   <head>
     <%- include('./partials/head.ejs') %>
     <title>Home</title>
+    <style>
+      .card-img-top {
+        width: 100%; /* Makes the image span the full width of the card */
+        height: 200px; /* Set the desired height */
+        object-fit: contain;
+        background-color: #f0f0f0; /* Ensures the image is cropped to fit */
+      }
+    </style>
   </head>
   <body>
     <%- include('./partials/navbar.ejs') %>
-    <%= JSON.stringify(blogs) %>
+    <div class="container mt-3">
+      <div class="row row-cols-1 row-cols-md-3 g-4">
+
+        <% blogs.forEach(blog => { %>
+          <div class="col">
+            <div class="card border border-black" style="width: 18rem;">
+              <img src="<%= blog.coverImageurl %>" class="card-img-top" alt="Cover Image">
+              <div class="card-body border-top">
+                <h5 class="card-title"> <%= blog.title %></h5>
+                <a href="/blog/<%= blog._id %>" class="btn btn-primary">Read..</a>
+              </div>
+            </div>
+          </div>
+        <% }) %>
+
+      </div>
+    </div>
     <%- include('./partials/scripts.ejs') %>
   </body>
 </html>

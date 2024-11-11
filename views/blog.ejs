@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('./partials/head.ejs') %>
+    <title>MindHub Blog</title>
+    <style>
+        .imagediv {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px; /* Adjust this value as needed */
+            max-width: 80%; /* Adjust the width for responsiveness */
+        }
+        .imagediv img {
+            max-width: 80%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <%- include('./partials/navbar.ejs') %>
+    <div class="container mt-4 d-flex flex-column align-items-center">
+        <h1><%= blog.title %></h1>
+        <div class="imagediv mb-3">
+            <img src="<%= blog.coverImageurl %>" class="img-fluid" alt="...">
+        </div>
+        <p class="fs-2"><%= blog.body %></p>
+    </div>
+
+
+    <div class=" container mb-3 border border-dark-subtle rounded-2" style="max-width: 540px;">
+        <div class="row g-0">
+          <div class="col-md-4">
+            <img src="<%= blog.createdBy.profileImage %>" class="img-fluid rounded-start rounded-circle" alt="...">
+          </div>
+          <div class="col-md-8">
+            <div class="card-body">
+              <h4 class="card-title"><%= blog.createdBy.name %></h4>
+              <p class="card-text">Author</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <%- include('./partials/scripts.ejs') %>
+</body>
+</html>
