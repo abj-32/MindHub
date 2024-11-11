@@ -10,7 +10,7 @@ function checkForAuthentication(cookieName){
 
         try {
             const userPayload=validateToken(tokenCookieValue);
-            req.user=userPayload
+            req.user=userPayload// a user is being inserted here so of any ones get logged in any request it further does browser sends this user to us also no matter on which route he is requesting
             return next();
         } catch (error) {
             

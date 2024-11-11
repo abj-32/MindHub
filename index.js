@@ -4,6 +4,8 @@ const { connectToMongoDB } = require("./connect");
 const cookieParser=require('cookie-parser')
 const {checkForAuthentication}=require('./middlewares/authentication')
 
+const Blog=require('./models/blog')
+
 
 const app = express();
 const PORT = 8000;
@@ -35,6 +37,7 @@ app.use(checkForAuthentication("token"))
 
 //======Routes==========================================
 const userRouter = require("./routes/user");
+const blogRouter = require("./routes/blog");
 
 //======================================================
 
@@ -45,11 +48,21 @@ app.set("view engine", "ejs");
 app.set("views", path.resolve("./views"));
 
 app.use("/user", userRouter);
-app.get("/", (req, res) => {
+app.use("/blog", blogRouter);
+
+
+
+//=====================================HomePage is being rendered from here===========================//
+app.get("/", async(req, res) => {
+  const allBlogs= await Blog.find({});
   res.render("home",{
-    user:req.user
+    user:req.user,
+    blogs:allBlogs
   });
+  //console.log(req.user);
 });
+
+//=====================================HomePage is being rendered from here=========================//
 
 
 
