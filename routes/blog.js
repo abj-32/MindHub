@@ -43,7 +43,7 @@ blogRouter.post("/comment/:blogId", async (req,res)=>{
 })
 
 
-blogRouter.post("/",upload.single('coverImageurl'),handleCreateBlog);
+blogRouter.post("/",upload.single("coverImageurl"),handleCreateBlog);
 
 
 

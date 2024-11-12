@@ -29,7 +29,6 @@ connectToMongoDB(process.env.MONGO_URL).then(() => {   //"mongodb://localhost:27
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser())
 app.use(checkForAuthentication("token"))
- //app.use(express.static('public'));
 app.use(express.static( path.resolve('./public')))
 
 
