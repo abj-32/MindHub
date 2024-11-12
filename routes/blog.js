@@ -3,6 +3,7 @@ const multer  = require('multer')
 const path=require('path')
 const {handleCreateBlog,handleBlogRendering}=require('../controllers/blog')
 const blogRouter=express.Router();
+const Comment=require('../models/comment')
 
 
 
@@ -31,7 +32,18 @@ blogRouter.get("/add-new",(req,res)=>{
 blogRouter.get("/:id", handleBlogRendering);
 
 
-blogRouter.post("/",upload.single('coverImage'),handleCreateBlog);
+
+blogRouter.post("/comment/:blogId", async (req,res)=>{
+  const comment=await Comment.create({
+    content:req.body.content,
+    blogId:req.params.blogId,
+    createdBy:req.user._id,
+  });
+  return res.redirect(`/blog/${req.params.blogId}`);
+})
+
+
+blogRouter.post("/",upload.single('coverImageurl'),handleCreateBlog);
 
 
 

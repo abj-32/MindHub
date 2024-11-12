@@ -41,6 +41,44 @@
         </div>
       </div>
 
+      <div class="container mt-3 mb-3">
+        <h2>Comments</h2>
+        <% if (locals.user) { %>
+          <form action="/blog/comment/<%= blog._id %>" method="post">
+            <div class="card">
+              <h5 class="card-header">Add comment</h5>
+              <div class="card-body">
+                <input
+                type="text"
+                name="content"
+                class="form-control"
+                placeholder="Enter your comments "
+              />
+              <button type="submit" class="btn btn-primary mt-1">Add</button>
+              </div>
+            </div>
+          </form>
+        <% } %>
+      </div>
+
+      <div class="container mt-3 mb-3">
+        
+        <% comments.forEach(comment => { %>
+
+          <div class="container mt-3 mb-3">
+                <div class="card">
+                  <h5 class="card-header"> <%= comment.createdBy.name %></h5>
+                  <div class="card-body">
+                    <p><%= comment.content %></p>
+                  </div>
+                </div>
+          </div>
+         
+        <% }) %>
+        
+
+      </div>
+
     <%- include('./partials/scripts.ejs') %>
 </body>
 </html>

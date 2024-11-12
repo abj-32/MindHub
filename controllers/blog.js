@@ -1,4 +1,5 @@
 const Blog=require('../models/blog')
+const Comment=require('../models/comment')
 
 
 async function handleCreateBlog(req,res){
@@ -18,10 +19,12 @@ async function handleCreateBlog(req,res){
 
 async function handleBlogRendering(req,res){
     const blog= await Blog.findById(req.params.id).populate("createdBy");
+    const comments=await Comment.find({blogId:req.params.id}).populate("createdBy")
     // console.log(blog);
     res.render("blog",{
         user:req.user,
         blog,
+        comments
     });
 }
 
